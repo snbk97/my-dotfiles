@@ -1,30 +1,35 @@
-# Fonts: Meslo LG S DZ for PowerLine
 # If you come from bash you might have to change your $PATH.
 # export PATH=$HOME/bin:/usr/local/bin:$PATH
+PATH=$PATH:/usr/local/bin
 export TERM="xterm-256color"
 # Path to your oh-my-zsh installation.
-  export ZSH=/home/snbk97/.oh-my-zsh
+export ZSH=/home/sayan/.oh-my-zsh
+WORK="/home/sayan/Documents/workbench/"
 ##################################################################################################################
 #    BLUR
 #
-  konsolex=$(qdbus | grep konsole | cut -f 2 -d\ )
-  if [ -n konsolex  ]; then
-      for konsole in $konsolex
-      do
-          xprop -f _KDE_NET_WM_BLUR_BEHIND_REGION 32c -set _KDE_NET_WM_BLUR_BEHIND_REGION 0 -id `qdbus $konsole /konsole/MainWindow_1 winId`;
-      done
-  fi
-  if [ `qdbus | grep yakuake`  ]; then
-      xprop -f _KDE_NET_WM_BLUR_BEHIND_REGION 32c -set _KDE_NET_WM_BLUR_BEHIND_REGION 0 -name Yakuake;
-  fi
+#  konsolex=$(qdbus | grep konsole | cut -f 2 -d\ )
+#  if [ -n konsolex  ]; then
+#      for konsole in $konsolex
+#      do
+#          xprop -f _KDE_NET_WM_BLUR_BEHIND_REGION 32c -set _KDE_NET_WM_BLUR_BEHIND_REGION 0 -id `qdbus $konsole /konsole/MainWindow_1 winId`;
+#      done
+#  fi
+#  if [ `qdbus | grep yakuake`  ]; then
+#      xprop -f _KDE_NET_WM_BLUR_BEHIND_REGION 32c -set _KDE_NET_WM_BLUR_BEHIND_REGION 0 -name Yakuake;
+#  fi
 ##################################################################################################################
 
 
 # Set name of the theme to load. Optionally, if you set this to "random"
 # it'll load a random theme each time that oh-my-zsh is loaded.
 # See https://github.com/robbyrussell/oh-my-zsh/wiki/Themes
+
+ZSH_THEME="spaceship"
+# ZSH_THEME="random"
+# ZSH_THEME="geometry/geometry"
 #ZSH_THEME="lambda/lambda-mod"
-ZSH_THEME="powerlevel9k/powerlevel9k"
+# ZSH_THEME="powerlevel9k/powerlevel9k"
 
 # Uncomment the following line to use case-sensitive completion.
 # CASE_SENSITIVE="true"
@@ -104,19 +109,25 @@ source $ZSH/oh-my-zsh.sh
 # Scripts
 # screenfetch -D Arch
 
+export PATH=$PATH:/var/lib/snapd/snap/bin
+export CHEAT_COLORS=true
 
+alias zz="clear"
 alias remove="yaourt -R"
 alias install="yaourt"
 alias lsg="ls | grep"
 alias git log="git log --pretty=oneline"
+alias pod="popd"
+alias pud="pushd"
+
 
 # Powerlevel9k
 POWERLEVEL9K_COLOR_SCHEME='dark'
 POWERLEVEL9K_MODE='awesome-patched'
 POWERLEVEL9K_SHORTEN_DIR_LENGTH=2
 POWERLEVEL9K_LEFT_PROMPT_ELEMENTS=(context dir)
-POWERLEVEL9K_RIGHT_PROMPT_ELEMENTS=(vcs battery status time)
-POWERLEVEL9K_BATTERY_ICON=$'\u26A1'
+POWERLEVEL9K_RIGHT_PROMPT_ELEMENTS=(vcs battery time)
+# POWERLEVEL9K_BATTERY_ICON=$'\u26A1'
 POWERLEVEL9K_STATUS_VERBOSE=false
 POWERLEVEL9K_TIME_FORMAT="%D{%d.%m.%y}"
 # enable the vcs segment in general
@@ -131,6 +142,95 @@ POWERLEVEL9K_CONTEXT_DEFAULT_FOREGROUND="cyan"
 POWERLEVEL9K_CONTEXT_ROOT_BACKGROUND="red"
 POWERLEVEL9K_CONTEXT_ROOT_FOREGROUND="blue"
 
+##======SpaceShip Theme========##
+# source "/home/sayan/.oh-my-zsh/custom/themes/spaceship-zsh-theme"
+SPACESHIP_PROMPT_ORDER=(
+  time     #
+  vi_mode  # these sections will be
+  user     # before prompt char
+  host     #
+  char
+  dir
+  git
+  node
+  ruby
+  xcode
+  swift
+  golang
+  docker
+  venv
+  pyenv
+)
 
+# USER
+SPACESHIP_USER_PREFIX="" # remove `with` before username
+SPACESHIP_USER_SUFFIX="" # remove space before host
 
+# HOST
+# Result will look like this:
+#   username@:(hostname)
+SPACESHIP_HOST_PREFIX="@:("
+SPACESHIP_HOST_SUFFIX=") "
 
+# DIR
+SPACESHIP_DIR_PREFIX='' # disable directory prefix, cause it's not the first section
+SPACESHIP_DIR_TRUNC='3' # show only last directory
+
+# GIT
+# Disable git symbol
+SPACESHIP_GIT_SYMBOL="" # disable git prefix
+SPACESHIP_GIT_BRANCH_PREFIX="" # disable branch prefix too
+# Wrap git in `git:(...)`
+SPACESHIP_GIT_PREFIX='git:('
+SPACESHIP_GIT_SUFFIX=") "
+SPACESHIP_GIT_BRANCH_SUFFIX="" # remove space after branch name
+# Unwrap git status from `[...]`
+SPACESHIP_GIT_STATUS_PREFIX=""
+SPACESHIP_GIT_STATUS_SUFFIX=""
+
+# NODE
+SPACESHIP_NODE_PREFIX="node:("
+SPACESHIP_NODE_SUFFIX=") "
+SPACESHIP_NODE_SYMBOL=""
+
+# RUBY
+SPACESHIP_RUBY_PREFIX="ruby:("
+SPACESHIP_RUBY_SUFFIX=") "
+SPACESHIP_RUBY_SYMBOL=""
+
+# XCODE
+SPACESHIP_XCODE_PREFIX="xcode:("
+SPACESHIP_XCODE_SUFFIX=") "
+SPACESHIP_XCODE_SYMBOL=""
+
+# SWIFT
+SPACESHIP_SWIFT_PREFIX="swift:("
+SPACESHIP_SWIFT_SUFFIX=") "
+SPACESHIP_SWIFT_SYMBOL=""
+
+# GOLANG
+SPACESHIP_GOLANG_PREFIX="go:("
+SPACESHIP_GOLANG_SUFFIX=") "
+SPACESHIP_GOLANG_SYMBOL=""
+
+# DOCKER
+SPACESHIP_DOCKER_PREFIX="docker:("
+SPACESHIP_DOCKER_SUFFIX=") "
+SPACESHIP_DOCKER_SYMBOL=""
+
+# VENV
+SPACESHIP_VENV_PREFIX="venv:("
+SPACESHIP_VENV_SUFFIX=") "
+
+# PYENV
+SPACESHIP_PYENV_PREFIX="python:("
+SPACESHIP_PYENV_SUFFIX=") "
+SPACESHIP_PYENV_SYMBOL=""
+
+##======SpaceShip Theme========##
+#
+## ==== My settings === ##
+alias gpustat="cat /sys/bus/pci/devices/0000:01:00.0/power/runtime_status"
+alias nv="nordvpn"
+alias ii="sudo dnf install -y"
+alias algos="cd ~/Documents/coding/Algos"
