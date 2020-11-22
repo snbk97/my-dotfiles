@@ -5,32 +5,41 @@ set nocompatible              " be iMproved, required
 " vim-plug
 call plug#begin()
     Plug 'morhetz/gruvbox'
+    " Plug 'drewtempelmeyer/palenight.vim'
+    Plug 'kaicataldo/material.vim', { 'branch': 'main' }
+    Plug 'sainnhe/sonokai'
+    Plug 'sheerun/vim-polyglot'
     Plug 'jeffkreeftmeijer/vim-numbertoggle'
-    Plug 'scrooloose/nerdtree'
-    Plug 'junegunn/fzf'
+    " Plug 'junegunn/fzf'
     Plug 'junegunn/vim-easy-align'
     Plug 'ctrlpvim/ctrlp.vim'
     Plug 'Raimondi/delimitMate'
     Plug 'godlygeek/tabular'
-    Plug 'vim-python/python-syntax'
+    " Plug 'vim-python/python-syntax'
     Plug 'tomtom/tcomment_vim'
     Plug 'moll/vim-bbye'
     Plug 'ntpeters/vim-better-whitespace'
-    Plug 'neoclide/coc.nvim', {'branch': 'release'}
     Plug 'ap/vim-buftabline/', {'on':[]}
     Plug 'vim-airline/vim-airline'
     Plug 'vim-airline/vim-airline-themes'
-    Plug 'crosbymichael/vim-cfmt'
-    Plug 'airblade/vim-gitgutter'
-    Plug 'tpope/vim-fugitive'
-    Plug 'tpope/vim-endwise'
+    " Plug 'crosbymichael/vim-cfmt'
+    " Plug 'airblade/vim-gitgutter'
+    " Plug 'tpope/vim-fugitive'
+    " Plug 'tpope/vim-endwise'
     Plug 'Yggdroot/indentLine'
-    Plug 'Vimjas/vim-python-pep8-indent'
+    " Plug 'Vimjas/vim-python-pep8-indent'
     Plug 'thinca/vim-quickrun'
     Plug 'mhinz/vim-sayonara'
     Plug 'mhinz/vim-startify'
-    Plug 'cespare/vim-toml'
+    " Plug 'cespare/vim-toml'
     Plug 'ryanoasis/vim-devicons'
+    Plug 'preservim/nerdtree'
+    Plug 'Xuyuanp/nerdtree-git-plugin'
+    Plug 'neoclide/coc.nvim', {'branch': 'release'}
+    Plug 'dsznajder/vscode-es7-javascript-react-snippets', { 'do': 'yarn install --frozen-lockfile && yarn compile' }
+    " Plug 'alvan/vim-closetag'
+    " Plug 'terryma/vim-multiple-cursors'
+    Plug 'Xuyuanp/yanil'
 call plug#end()
 " turned on auto, by vim-plug
 filetype plugin indent off
@@ -38,6 +47,25 @@ syntax on
 "
 " Settings
 "
+
+if (has("termguicolors"))
+ set termguicolors
+endif
+" set t_Co=256
+" set background=dark
+" colorscheme gruvbox
+" colorscheme palenight
+" colorscheme sonokai
+" let g:material_theme_style = 'default' | 'palenight' | 'ocean' | 'lighter' | 'darker' | 'default-community' | 'palenight-community' | 'ocean-community' | 'lighter-community' | 'darker-community'
+let g:material_theme_style = 'default-community'
+let g:material_terminal_italics = 1
+" let g:palenight_color_overrides = {
+" \    'black': { 'gui': '#000000', "cterm": "0", "cterm16": "0", "guifg":"0" },
+"
+" \}
+colorscheme material
+
+
 set signcolumn=yes
 set encoding=utf8               " Encoding
 set noerrorbells                " No beeps
@@ -45,7 +73,7 @@ set number                      " Show line numbers
 set backspace=indent,eol,start  " Makes backspace key more powerful.
 set showcmd                     " Show me what I'm typing
 set showmode                    " Show current mode.
-set ttymouse=xterm2
+" set ttymouse=xterm2
 set noswapfile                  " Don't use swapfile
 set nobackup					" Don't create annoying backup files
 set nowritebackup
@@ -111,6 +139,8 @@ set shiftround
 " Time out on key codes but not mappings.
 " Basically this makes terminal Vim work sanely.
 set notimeout
+set timeoutlen=500
+
 set ttimeout
 set ttimeoutlen=10
 
@@ -199,18 +229,14 @@ if has('gui_running')
   set regexpengine=1
   syntax enable
 endif
-set background=dark
 let g:rehash256=1
 
 nmap <silent><F12> :let &bg = (&bg == 'light' ? 'dark' : 'light')<CR>
 let g:kalahari_italic = 1
-" colorscheme kalahari
 
 " let g:gruvbox_termcolors=16
-colorscheme gruvbox
 
 " set guifont=Inconsolata:h18
-set guifont=Source_Code_Pro_Light:h15:cANSI
 set guioptions-=L
 
 " This comes first, because we have mappings that depend on leader
@@ -307,6 +333,7 @@ nnoremap <F6> :setlocal spell! spell?<CR>
 
 " Select search pattern howewever do not jump to the next one
 nnoremap <leader>c :TComment<CR>
+xmap <leader>c :TComment<CR>
 
 " Search mappings: These will make it so that going to the next one in a
 " search will center on the line it's found in.
@@ -349,10 +376,16 @@ endfunction
 
 " set 80 character line limit
 if exists('+colorcolumn')
-  set colorcolumn=80
+  set colorcolumn=120
 else
   au BufWinEnter * let w:m2=matchadd('ErrorMsg', '\%>80v.\+', -1)
 endif
+
+" ================= clang-format ==================
+
+" map <C-K> :pyf /usr/share/clang/clang-format.py<cr>
+" imap <C-K> <c-o>:py3f /usr/share/clang/clang-format.py<cr>
+" autocmd BufWritePre *.cpp,*.hpp py3f /usr/share/clang/clang-format.py
 
 " ----------------------------------------- "
 " File Type settings 			    		"
@@ -429,7 +462,21 @@ set wildignore+=*.orig                           " Merge resolution files
 " Plugin configs 			    			"
 " ----------------------------------------- "
 
-" ==================== CtrlP ====================
+" ==================== CtrlP ====================i
+let g:ctrlp_extensions = ['smarttabs']
+let g:ctrlp_smarttabs_modify_tabline = 0
+" If 1 will highlight the selected file in the tabline.
+" (Default: 1)
+
+let g:ctrlp_smarttabs_reverse = 0
+" Reverse the order in which files are displayed.
+" (Default: 1)
+
+let g:ctrlp_smarttabs_exclude_quickfix = 1
+" Exclude quickfix buffers.
+" (Default: 0)
+
+
 let g:ctrlp_cmd = 'CtrlP'
 let g:ctrlp_working_path_mode = 'ra'
 let g:ctrlp_max_height = 10		" maxiumum height of match window
@@ -521,6 +568,45 @@ let g:delimitMate_expand_inside_quotes = 0
 let g:delimitMate_smart_matchpairs = '^\%(\w\|\$\)'
 
 "==================== NerdTree ====================
+let g:NERDTreeGitStatusIndicatorMapCustom = {
+    \ 'Modified'  :'✹',
+    \ 'Staged'    :'✚',
+    \ 'Untracked' :'✭',
+    \ 'Renamed'   :'➜',
+    \ 'Unmerged'  :'═',
+    \ 'Deleted'   :'✖',
+    \ 'Dirty'     :'✗',
+    \ 'Ignored'   :'☒',
+    \ 'Clean'     :'✔︎',
+    \ 'Unknown'   :'?',
+    \ }
+
+function! NERDTreeHighlightFile(extension, fg, bg, guifg, guibg)
+ exec 'autocmd filetype nerdtree highlight ' . a:extension .' ctermbg='. a:bg .' ctermfg='. a:fg .' guibg='. a:guibg .' guifg='. a:guifg
+ exec 'autocmd filetype nerdtree syn match ' . a:extension .' #^\s\+.*'. a:extension .'$#'
+endfunction
+
+call NERDTreeHighlightFile('jade', 'green', 'none', 'green', '#151515')
+call NERDTreeHighlightFile('ini', 'yellow', 'none', 'yellow', '#151515')
+call NERDTreeHighlightFile('md', 'blue', 'none', '#3366FF', '#151515')
+call NERDTreeHighlightFile('yml', 'yellow', 'none', 'yellow', '#151515')
+call NERDTreeHighlightFile('config', 'yellow', 'none', 'yellow', '#151515')
+call NERDTreeHighlightFile('conf', 'yellow', 'none', 'yellow', '#151515')
+call NERDTreeHighlightFile('json', 'yellow', 'none', 'yellow', '#151515')
+call NERDTreeHighlightFile('html', 'yellow', 'none', 'yellow', '#151515')
+call NERDTreeHighlightFile('styl', 'cyan', 'none', 'cyan', '#151515')
+call NERDTreeHighlightFile('css', 'cyan', 'none', 'cyan', '#151515')
+call NERDTreeHighlightFile('coffee', 'Red', 'none', 'red', '#151515')
+call NERDTreeHighlightFile('js', 'Red', 'none', '#ffa500', '#151515')
+call NERDTreeHighlightFile('php', 'Magenta', 'none', '#ff00ff', '#151515')
+
+let g:NERDTreeGitStatusUseNerdFonts = 1 " you should install nerdfonts by yourself. default: 0
+let g:NERDTreeGitStatusShowIgnored = 1 " a heavy feature may cost much more time. default: 0
+" let g:NERDTreeGitStatusUntrackedFilesMode = 'all' " a heave feature too. default: normal
+let g:NERDTreeGitStatusShowClean = 1 " default: 0
+let g:NERDTreeGitStatusConcealBrackets = 1 " default: 0
+
+
 " For toggling
 nmap <C-\> :NERDTreeToggle<CR>
 noremap <Leader>n :NERDTreeToggle<cr>
@@ -528,36 +614,69 @@ noremap <Leader>f :NERDTreeFind<cr>
 
 let NERDTreeShowHidden=1
 let NERDTreeIgnore=['\.vim$', '\~$', '\.git$', '\.pyc$', '.DS_Store']
-let NERDTreeMinimalUI = 1
+let NERDTreeMinimalUI = 0
 let NERDTreeDirArrows = 1
-
+let NERDTreeIgnore = ['^node_modules$']
 " Close nerdtree and vim on close file
 autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTreeType == "primary") | q | endif
 " let NERDTreeQuitOnOpen = 1
 " ==================== vim-json ====================
 let g:vim_json_syntax_conceal = 1
 
-" ==================== Completion =========================
-" use deoplete for Neovim.
-" if has('nvim')
-"   let g:deoplete#enable_at_startup = 1
-"   let g:deoplete#ignore_sources = {}
-"   let g:deoplete#ignore_sources._ = ['buffer', 'member', 'tag', 'file', 'neosnippet']
-"   let g:deoplete#sources#go#sort_class = ['func', 'type', 'var', 'const']
-"   let g:deoplete#sources#go#align_class = 1
-"
-"
-"   " Use partial fuzzy matches like YouCompleteMe
-"   call deoplete#custom#set('_', 'matchers', ['matcher_fuzzy'])
-"   call deoplete#custom#set('_', 'converters', ['converter_remove_paren'])
-"   call deoplete#custom#set('_', 'disabled_syntaxes', ['Comment', 'String'])
-" endif
+" ==================== CoC ====================
+nmap <silent> gd <Plug>(coc-definition)
+nmap <silent> gy <Plug>(coc-type-definition)
+nmap <silent> gi <Plug>(coc-implementation)
+nmap <silent> gr <Plug>(coc-references)
 
+nmap <F2> <Plug>(coc-rename)
+nmap <F4> <Plug>(coc-terminal-toggle)
+xmap <leader>f  <Plug>(coc-format-selected)
+nmap <leader>f  <Plug>(coc-format-selected)
 
+nnoremap <silent> K :call <SID>show_documentation()<CR>
 
-" let g:deoplete#enable_at_startup = 1
-" <TAB>: completion.
+function! s:show_documentation()
+  if (index(['vim','help'], &filetype) >= 0)
+    execute 'h '.expand('<cword>')
+  else
+    call CocAction('doHover')
+  endif
+endfunction
+
 inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
+inoremap <silent><expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-TAB>"
+
+" Use <C-l> for trigger snippet expand.
+imap <C-l> <Plug>(coc-snippets-expand)
+
+" Use <C-j> for select text for visual placeholder of snippet.
+vmap <C-j> <Plug>(coc-snippets-select)
+
+" Use <C-j> for jump to next placeholder, it's default of coc.nvim
+" let g:coc_snippet_next = '<c-j>'
+
+" Use <C-k> for jump to previous placeholder, it's default of coc.nvim
+" let g:coc_snippet_prev = '<c-k>'
+
+" Use <C-j> for both expand and jump (make expand higher priority.)
+imap <C-j> <Plug>(coc-snippets-expand-jump)
+
+" Use <leader>x for convert visual selected code to snippet
+xmap <leader>x  <Plug>(coc-convert-snippet)
+
+inoremap <silent><expr> <C-k>
+      \ pumvisible() ? coc#_select_confirm() :
+      \ coc#expandableOrJumpable() ? "\<C-r>=coc#rpc#request('doKeymap', ['snippets-expand-jump',''])\<CR>" :
+      \ <SID>check_back_space() ? "\<TAB>" :
+      \ coc#refresh()
+
+function! s:check_back_space() abort
+  let col = col('.') - 1
+  return !col || getline('.')[col - 1]  =~# '\s'
+endfunction
+
+let g:coc_snippet_next = '<c-k>'
 " ==================== vim-mardownfmt ====================
 " let g:markdownfmt_autosave = 1
 
@@ -586,29 +705,67 @@ endfunction
 " let g:gitgutter_diff_relative_to = 'working_tree'
 let g:gitgutter_async = 1
 let g:gitgutter_enabled = 1
-autocmd BufWritePost * GitGutter
+" autocmd BufWritePost * GitGutter
 " ========= vim-better-whitespace ==================
 
 " auto strip whitespace except for file with extention blacklisted
 let blacklist = ['markdown', 'md']
 autocmd BufWritePre * StripWhitespace
 
-" ================= clang-format ==================
 
-map <C-K> :pyf /usr/share/clang/clang-format.py<cr>
-imap <C-K> <c-o>:pyf /usr/share/clang/clang-format.py<cr>
-autocmd BufWritePre *.cpp,*.hpp pyf /usr/share/clang/clang-format.py
+" =================== vim-closetags ========================
+" filenames like *.xml, *.html, *.xhtml, ...
+" These are the file extensions where this plugin is enabled.
+"
+let g:closetag_filenames = '*.html,*.xhtml,*.phtml'
+
+" filenames like *.xml, *.xhtml, ...
+" This will make the list of non-closing tags self-closing in the specified files.
+"
+let g:closetag_xhtml_filenames = '*.xhtml,*.jsx'
+
+" filetypes like xml, html, xhtml, ...
+" These are the file types where this plugin is enabled.
+"
+let g:closetag_filetypes = 'html,xhtml,phtml'
+
+" filetypes like xml, xhtml, ...
+" This will make the list of non-closing tags self-closing in the specified files.
+"
+let g:closetag_xhtml_filetypes = 'xhtml,jsx'
+
+" integer value [0|1]
+" This will make the list of non-closing tags case-sensitive (e.g. `<Link>` will be closed while `<link>` won't.)
+"
+let g:closetag_emptyTags_caseSensitive = 1
+
+" dict
+" Disables auto-close if not in a "valid" region (based on filetype)
+"
+let g:closetag_regions = {
+    \ 'typescript.tsx': 'jsxRegion,tsxRegion',
+    \ 'javascript.jsx': 'jsxRegion',
+    \ }
+
+" Shortcut for closing tags, default is '>'
+"
+let g:closetag_shortcut = '>'
+
+" Add > at current position without closing the current tag, default is ''
+"
+let g:closetag_close_shortcut = '<leader>>'
 
 " =================== vim-airline ========================
 let g:airline_powerline_fonts = 1
-" let g:airline_theme='powerlineish'
-" let g:airline_theme='solarized'
-let g:airline_theme='gruvbox'
+let g:airline_theme='material'
+" let g:airline_theme='palenight'
+" let g:airline_theme='gruvbox'
+" let g:airline_theme='sonokai'
 let g:airline#extensions#tabline#enabled = 1
 let g:airline#extensions#tabline#left_sep = ''
 let g:airline#extensions#tabline#left_alt_sep = '|'
 let g:airline#extensions#tabline#formatter = 'unique_tail'
-
+let g:airline_section_c= '%F'
 if !exists('g:airline_symbols')
         let g:airline_symbols = {}
     endif
@@ -651,26 +808,24 @@ let g:airline_symbols.maxlinenr = ''
 " Startify config
     let g:startify_custom_header = 0
 " TabNine config
-    set rtp+=~/.vim/bundle/tabnine-vim
+    " set rtp+=~/.vim/bundle/tabnine-vim
     " vim:ts=2:sw=2:eti
 " vim-javascript configs
     let g:javascript_plugin_jsdoc = 1
     let g:javascript_plugin_ngdoc = 1
     let g:javascript_plugin_flow = 1
 
-    " The Silver Searcher
-    if executable('pt')
-    " Use ag over grep
-    set grepprg=pt\ --nogroup\ --nocolor
+" Silver Searcher
+    if executable('ag')
+    " use ag over grep
+    set grepprg=ag\ --nogroup\ --nocolor
 
-    " Use ag in CtrlP for listing files. Lightning fast and respects .gitignore
+    " use ag in ctrlp for listing files. lightning fast and respects .gitignore
     let g:ctrlp_user_command = 'pt %s -l --nocolor -g ""'
 
-    " ag is fast enough that CtrlP doesn't need to cache
+    " ag is fast enough that ctrlp doesn't need to cache
     let g:ctrlp_use_caching = 0
     endif
+    command -nargs=+ -complete=file -bar Ag silent! grep! <args>|cwindow|redraw!
+    nnoremap \ :Ag<space>
 
-    " augroup javascript_folding
-      " au!
-      " au FileType javascript setlocal foldmethod=syntax
-    " augroup END
