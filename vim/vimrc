@@ -5,7 +5,6 @@ set nocompatible              " be iMproved, required
 " vim-plug
 call plug#begin()
     Plug 'morhetz/gruvbox'
-    " Plug 'drewtempelmeyer/palenight.vim'
     Plug 'kaicataldo/material.vim', { 'branch': 'main' }
     Plug 'sainnhe/sonokai'
     Plug 'sheerun/vim-polyglot'
@@ -23,8 +22,8 @@ call plug#begin()
     Plug 'vim-airline/vim-airline'
     Plug 'vim-airline/vim-airline-themes'
     " Plug 'crosbymichael/vim-cfmt'
-    " Plug 'airblade/vim-gitgutter'
-    " Plug 'tpope/vim-fugitive'
+    Plug 'airblade/vim-gitgutter'
+    Plug 'tpope/vim-fugitive'
     " Plug 'tpope/vim-endwise'
     Plug 'Yggdroot/indentLine'
     " Plug 'Vimjas/vim-python-pep8-indent'
@@ -40,6 +39,7 @@ call plug#begin()
     " Plug 'alvan/vim-closetag'
     " Plug 'terryma/vim-multiple-cursors'
     Plug 'Xuyuanp/yanil'
+    Plug 'NLKNguyen/papercolor-theme'
 call plug#end()
 " turned on auto, by vim-plug
 filetype plugin indent off
@@ -53,11 +53,14 @@ if (has("termguicolors"))
 endif
 " set t_Co=256
 " set background=dark
+" colorscheme PaperColor
 " colorscheme gruvbox
 " colorscheme palenight
 " colorscheme sonokai
+colorscheme material
 " let g:material_theme_style = 'default' | 'palenight' | 'ocean' | 'lighter' | 'darker' | 'default-community' | 'palenight-community' | 'ocean-community' | 'lighter-community' | 'darker-community'
-let g:material_theme_style = 'default-community'
+let g:material_theme_style = 'palenight'
+" let g:material_theme_style = 'lighter-community'
 let g:material_terminal_italics = 1
 " let g:palenight_color_overrides = {
 " \    'black': { 'gui': '#000000', "cterm": "0", "cterm16": "0", "guifg":"0" },
@@ -65,7 +68,10 @@ let g:material_terminal_italics = 1
 " \}
 colorscheme material
 
-
+" nvim ttymouse fix
+if !has('nvim')
+    set ttymouse=xterm2
+endif
 set signcolumn=yes
 set encoding=utf8               " Encoding
 set noerrorbells                " No beeps
@@ -106,7 +112,7 @@ set nocursorline
 
 syntax sync minlines=256
 set synmaxcol=300
-set re=1
+set re=0
 
 " open help vertically
 command! -nargs=* -complete=help Help vertical belowright help <args>
@@ -129,8 +135,8 @@ set showmatch
 set smarttab
 
 set et
-set tabstop=4
-set shiftwidth=4
+set tabstop=2
+set shiftwidth=2
 set expandtab
 
 set nrformats-=octal
@@ -298,9 +304,10 @@ nnoremap <leader>a :cclose<CR>
 nnoremap <leader><space> :nohlsearch<CR>
 
 " QuickRun
-nnoremap <leader>z :QuickRun<CR>
+nnoremap <leader>r :QuickRun<CR>
 let g:quickrun_known_file_types = {
     \"py": ["!python3 %"],
+    \"md": ["!okular %"],
   \}
 
 
@@ -411,6 +418,10 @@ au FileType nginx setlocal noet ts=4 sw=4 sts=4
 " Go settings
 au BufNewFile,BufRead *.go setlocal noet ts=4 sw=4 sts=4
 " autocmd BufEnter *.go colorscheme nofrils-dark
+
+"cpp settings
+autocmd BufNewFile *.cpp 0r ~/.vim/templates/skeleton.cpp
+au BufNewFile,BufRead *.cpp setlocal expandtab ts=2 sw=2
 
 " scala settings
 autocmd BufNewFile,BufReadPost *.scala setl shiftwidth=2 expandtab
@@ -568,42 +579,42 @@ let g:delimitMate_expand_inside_quotes = 0
 let g:delimitMate_smart_matchpairs = '^\%(\w\|\$\)'
 
 "==================== NerdTree ====================
-let g:NERDTreeGitStatusIndicatorMapCustom = {
-    \ 'Modified'  :'✹',
-    \ 'Staged'    :'✚',
-    \ 'Untracked' :'✭',
-    \ 'Renamed'   :'➜',
-    \ 'Unmerged'  :'═',
-    \ 'Deleted'   :'✖',
-    \ 'Dirty'     :'✗',
-    \ 'Ignored'   :'☒',
-    \ 'Clean'     :'✔︎',
-    \ 'Unknown'   :'?',
-    \ }
+" let g:NERDTreeGitStatusIndicatorMapCustom = {
+"     \ 'Modified'  :'✹',
+"     \ 'Staged'    :'✚',
+"     \ 'Untracked' :'✭',
+"     \ 'Renamed'   :'➜',
+"     \ 'Unmerged'  :'═',
+"     \ 'Deleted'   :'✖',
+"     \ 'Dirty'     :'✗',
+"     \ 'Ignored'   :'☒',
+"     \ 'Clean'     :'✔︎',
+"     \ 'Unknown'   :'?',
+"     \ }
 
 function! NERDTreeHighlightFile(extension, fg, bg, guifg, guibg)
  exec 'autocmd filetype nerdtree highlight ' . a:extension .' ctermbg='. a:bg .' ctermfg='. a:fg .' guibg='. a:guibg .' guifg='. a:guifg
  exec 'autocmd filetype nerdtree syn match ' . a:extension .' #^\s\+.*'. a:extension .'$#'
 endfunction
 
-call NERDTreeHighlightFile('jade', 'green', 'none', 'green', '#151515')
-call NERDTreeHighlightFile('ini', 'yellow', 'none', 'yellow', '#151515')
-call NERDTreeHighlightFile('md', 'blue', 'none', '#3366FF', '#151515')
-call NERDTreeHighlightFile('yml', 'yellow', 'none', 'yellow', '#151515')
-call NERDTreeHighlightFile('config', 'yellow', 'none', 'yellow', '#151515')
-call NERDTreeHighlightFile('conf', 'yellow', 'none', 'yellow', '#151515')
-call NERDTreeHighlightFile('json', 'yellow', 'none', 'yellow', '#151515')
-call NERDTreeHighlightFile('html', 'yellow', 'none', 'yellow', '#151515')
-call NERDTreeHighlightFile('styl', 'cyan', 'none', 'cyan', '#151515')
-call NERDTreeHighlightFile('css', 'cyan', 'none', 'cyan', '#151515')
-call NERDTreeHighlightFile('coffee', 'Red', 'none', 'red', '#151515')
-call NERDTreeHighlightFile('js', 'Red', 'none', '#ffa500', '#151515')
-call NERDTreeHighlightFile('php', 'Magenta', 'none', '#ff00ff', '#151515')
+" call NERDTreeHighlightFile('jade', 'green', 'none', 'green', '#151515')
+" call NERDTreeHighlightFile('ini', 'yellow', 'none', 'yellow', '#151515')
+" call NERDTreeHighlightFile('md', 'blue', 'none', '#3366FF', '#151515')
+" call NERDTreeHighlightFile('yml', 'yellow', 'none', 'yellow', '#151515')
+" call NERDTreeHighlightFile('config', 'yellow', 'none', 'yellow', '#151515')
+" call NERDTreeHighlightFile('conf', 'yellow', 'none', 'yellow', '#151515')
+" call NERDTreeHighlightFile('json', 'yellow', 'none', 'yellow', '#151515')
+" call NERDTreeHighlightFile('html', 'yellow', 'none', 'yellow', '#151515')
+" call NERDTreeHighlightFile('styl', 'cyan', 'none', 'cyan', '#151515')
+" call NERDTreeHighlightFile('css', 'cyan', 'none', 'cyan', '#151515')
+" call NERDTreeHighlightFile('coffee', 'Red', 'none', 'red', '#151515')
+" call NERDTreeHighlightFile('js', 'Red', 'none', '#ffa500', '#151515')
+" call NERDTreeHighlightFile('php', 'Magenta', 'none', '#f283f2', '#151515')
 
 let g:NERDTreeGitStatusUseNerdFonts = 1 " you should install nerdfonts by yourself. default: 0
-let g:NERDTreeGitStatusShowIgnored = 1 " a heavy feature may cost much more time. default: 0
+let g:NERDTreeGitStatusShowIgnored = 0 " a heavy feature may cost much more time. default: 0
 " let g:NERDTreeGitStatusUntrackedFilesMode = 'all' " a heave feature too. default: normal
-let g:NERDTreeGitStatusShowClean = 1 " default: 0
+let g:NERDTreeGitStatusShowClean = 0 " default: 0
 let g:NERDTreeGitStatusConcealBrackets = 1 " default: 0
 
 
@@ -758,7 +769,7 @@ let g:closetag_close_shortcut = '<leader>>'
 " =================== vim-airline ========================
 let g:airline_powerline_fonts = 1
 let g:airline_theme='material'
-" let g:airline_theme='palenight'
+" let g:airline_theme='papercolor'
 " let g:airline_theme='gruvbox'
 " let g:airline_theme='sonokai'
 let g:airline#extensions#tabline#enabled = 1
@@ -810,6 +821,7 @@ let g:airline_symbols.maxlinenr = ''
 " TabNine config
     " set rtp+=~/.vim/bundle/tabnine-vim
     " vim:ts=2:sw=2:eti
+
 " vim-javascript configs
     let g:javascript_plugin_jsdoc = 1
     let g:javascript_plugin_ngdoc = 1
@@ -821,7 +833,7 @@ let g:airline_symbols.maxlinenr = ''
     set grepprg=ag\ --nogroup\ --nocolor
 
     " use ag in ctrlp for listing files. lightning fast and respects .gitignore
-    let g:ctrlp_user_command = 'pt %s -l --nocolor -g ""'
+    let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
 
     " ag is fast enough that ctrlp doesn't need to cache
     let g:ctrlp_use_caching = 0
