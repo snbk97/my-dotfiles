@@ -23,8 +23,8 @@ call plug#begin()
     Plug 'vim-airline/vim-airline'
     Plug 'vim-airline/vim-airline-themes'
     " Plug 'crosbymichael/vim-cfmt'
-    " Plug 'airblade/vim-gitgutter'
-    " Plug 'tpope/vim-fugitive'
+    Plug 'airblade/vim-gitgutter'
+    Plug 'tpope/vim-fugitive'
     " Plug 'tpope/vim-endwise'
     Plug 'Yggdroot/indentLine'
     " Plug 'Vimjas/vim-python-pep8-indent'
@@ -40,6 +40,7 @@ call plug#begin()
     " Plug 'alvan/vim-closetag'
     " Plug 'terryma/vim-multiple-cursors'
     Plug 'Xuyuanp/yanil'
+    Plug 'NLKNguyen/papercolor-theme'
 call plug#end()
 " turned on auto, by vim-plug
 filetype plugin indent off
@@ -53,11 +54,14 @@ if (has("termguicolors"))
 endif
 " set t_Co=256
 " set background=dark
+colorscheme PaperColor
 " colorscheme gruvbox
 " colorscheme palenight
 " colorscheme sonokai
+" colorscheme material
 " let g:material_theme_style = 'default' | 'palenight' | 'ocean' | 'lighter' | 'darker' | 'default-community' | 'palenight-community' | 'ocean-community' | 'lighter-community' | 'darker-community'
-let g:material_theme_style = 'default-community'
+" let g:material_theme_style = 'lighter'
+" let g:material_theme_style = 'lighter-community'
 let g:material_terminal_italics = 1
 " let g:palenight_color_overrides = {
 " \    'black': { 'gui': '#000000', "cterm": "0", "cterm16": "0", "guifg":"0" },
@@ -65,7 +69,10 @@ let g:material_terminal_italics = 1
 " \}
 colorscheme material
 
-
+" nvim ttymouse fix
+if !has('nvim')
+    set ttymouse=xterm2
+endif
 set signcolumn=yes
 set encoding=utf8               " Encoding
 set noerrorbells                " No beeps
@@ -106,7 +113,7 @@ set nocursorline
 
 syntax sync minlines=256
 set synmaxcol=300
-set re=1
+set re=0
 
 " open help vertically
 command! -nargs=* -complete=help Help vertical belowright help <args>
@@ -412,6 +419,10 @@ au FileType nginx setlocal noet ts=4 sw=4 sts=4
 au BufNewFile,BufRead *.go setlocal noet ts=4 sw=4 sts=4
 " autocmd BufEnter *.go colorscheme nofrils-dark
 
+"cpp settings
+autocmd BufNewFile *.cpp 0r ~/.vim/templates/skeleton.cpp
+au BufNewFile,BufRead *.cpp setlocal expandtab ts=2 sw=2
+
 " scala settings
 autocmd BufNewFile,BufReadPost *.scala setl shiftwidth=2 expandtab
 
@@ -601,9 +612,9 @@ call NERDTreeHighlightFile('js', 'Red', 'none', '#ffa500', '#151515')
 call NERDTreeHighlightFile('php', 'Magenta', 'none', '#ff00ff', '#151515')
 
 let g:NERDTreeGitStatusUseNerdFonts = 1 " you should install nerdfonts by yourself. default: 0
-let g:NERDTreeGitStatusShowIgnored = 1 " a heavy feature may cost much more time. default: 0
+let g:NERDTreeGitStatusShowIgnored = 0 " a heavy feature may cost much more time. default: 0
 " let g:NERDTreeGitStatusUntrackedFilesMode = 'all' " a heave feature too. default: normal
-let g:NERDTreeGitStatusShowClean = 1 " default: 0
+let g:NERDTreeGitStatusShowClean = 0 " default: 0
 let g:NERDTreeGitStatusConcealBrackets = 1 " default: 0
 
 
@@ -810,6 +821,7 @@ let g:airline_symbols.maxlinenr = ''
 " TabNine config
     " set rtp+=~/.vim/bundle/tabnine-vim
     " vim:ts=2:sw=2:eti
+
 " vim-javascript configs
     let g:javascript_plugin_jsdoc = 1
     let g:javascript_plugin_ngdoc = 1

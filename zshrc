@@ -138,6 +138,13 @@ alias gst="git status"
 alias gco="git checkout"
 alias gd="git diff"
 alias gdt="git difftool -Yt meld"
+alias bat='upower -i $(upower -e | grep 'BAT') | grep -E "state|to\ full|percentage"'
+alias l="lsd"
+alias ll="l -l"
+alias la="ll -a"
+# alias lt='l --tree'
+export NVM_DIR="$([ -z "${XDG_CONFIG_HOME-}" ] && printf %s "${HOME}/.nvm" || printf %s "${XDG_CONFIG_HOME}/nvm")"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh" # This loads nvm
 
 #########################################
 #   zplugins                            #
