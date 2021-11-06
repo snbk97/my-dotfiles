@@ -11,3 +11,5 @@ yourself.
  - Ag for searching (you'll need to install it).
  - vim fugitive
  - uses coc LSP
+
+![coc extension list](https://github.com/snbk97/my-dotfiles/blob/master/vim/screenshots/coc-exrtensions.png)
