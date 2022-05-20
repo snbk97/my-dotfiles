@@ -9,6 +9,10 @@ WORK="/home/sayan/Documents/workbench/"
 # ZSH_THEME="spaceship"
 ZSH_THEME="lambda/lambda-mod"
 # ZSH_THEME="lambda-pure"
+
+
+
+
 # Uncomment the following line to use case-sensitive completion.
 # CASE_SENSITIVE="true"
 
@@ -51,6 +55,25 @@ ZSH_THEME="lambda/lambda-mod"
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
+
+SPACESHIP_PACKAGE_SHOW=false
+SPACESHIP_HG_SHOW=false
+SPACESHIP_RUBY_SHOW=false
+SPACESHIP_ELM_SHOW=false
+SPACESHIP_ELIXIR_SHOW=false
+SPACESHIP_RUST_SHOW=false
+SPACESHIP_HASKELL_SHOW=false
+SPACESHIP_JULIA_SHOW=false
+SPACESHIP_GCLOUD_SHOW=false
+SPACESHIP_VENV_SHOW=false
+SPACESHIP_CONDA_SHOW=false
+SPACESHIP_DOTNET_SHOW=false
+SPACESHIP_EMBER_SHOW=false
+PACESHIP_GRADLE_SHOW=false
+SPACESHIP_MAVEN_SHOW=false
+SPACESHIP_TERRAFORM_SHOW=false
+SPACESHIP_IBMCLOUD_SHOW=false
+
 plugins=(
     git,
     poetry,
@@ -58,64 +81,39 @@ plugins=(
     )
 
 source $ZSH/oh-my-zsh.sh
-source /home/sayan/.zinit/bin/zplugin.zsh
-
-# User configuration
-
-# export MANPATH="/usr/local/man:$MANPATH"
-
-# You may need to manually set your language environment
-# export LANG=en_US.UTF-8
-
-# Preferred editor for local and remote sessions
-# if [[ -n $SSH_CONNECTION ]]; then
-#   export EDITOR='vim'
-# else
-#   export EDITOR='mvim'
-# fi
-
-# Compilation flags
-# export ARCHFLAGS="-arch x86_64"
-
-# ssh
-# export SSH_KEY_PATH="~/.ssh/dsa_id"
-
-# Set personal aliases, overriding those provided by oh-my-zsh libs,
-# plugins, and themes. Aliases can be placed here, though oh-my-zsh
-# users are encouraged to define aliases within the ZSH_CUSTOM folder.
-# For a full list of active aliases, run `alias`.
-#
-# Example aliases
-# alias zshconfig="mate ~/.zshrc"
-# alias ohmyzsh="mate ~/.oh-my-zsh"
-#
-# Scripts
-# screenfetch -D Arch
 
 export PATH=$PATH:/var/lib/snapd/snap/bin
 export CHEAT_COLORS=true
 
+SPACESHIP_PACKAGE_SHOW=false
+SPACESHIP_HG_SHOW=false
+SPACESHIP_RUBY_SHOW=false
+SPACESHIP_ELM_SHOW=false
+SPACESHIP_ELIXIR_SHOW=false
+SPACESHIP_RUST_SHOW=false
+SPACESHIP_HASKELL_SHOW=false
+SPACESHIP_JULIA_SHOW=false
+SPACESHIP_GCLOUD_SHOW=false
+SPACESHIP_VENV_SHOW=false
+SPACESHIP_CONDA_SHOW=false
+SPACESHIP_DOTNET_SHOW=false
+SPACESHIP_EMBER_SHOW=false
+PACESHIP_GRADLE_SHOW=false
+SPACESHIP_MAVEN_SHOW=false
+SPACESHIP_TERRAFORM_SHOW=false
+SPACESHIP_IBMCLOUD_SHOW=false
 
-# Powerlevel9k
-POWERLEVEL9K_COLOR_SCHEME='dark'
-POWERLEVEL9K_MODE='awesome-patched'
-POWERLEVEL9K_SHORTEN_DIR_LENGTH=2
-POWERLEVEL9K_LEFT_PROMPT_ELEMENTS=(context dir)
-POWERLEVEL9K_RIGHT_PROMPT_ELEMENTS=(vcs battery time)
-# POWERLEVEL9K_BATTERY_ICON=$'\u26A1'
-POWERLEVEL9K_STATUS_VERBOSE=false
-POWERLEVEL9K_TIME_FORMAT="%D{%d.%m.%y}"
-# enable the vcs segment in general
-POWERLEVEL9K_SHOW_CHANGESET=true
-# just show the 6 first characters of changeset
-POWERLEVEL9K_CHANGESET_HASH_LENGTH=6
-POWERLEVEL9K_HIDE_BRANCH_ICON=fasle
-POWERLEVEL9K_PROMPT_ON_NEWLINE=true
+plugins=(
+  git
+  docker
+  history-search-multi-word
+)
 
-# Customizing `context` colors for root and non-root users
-POWERLEVEL9K_CONTEXT_DEFAULT_FOREGROUND="cyan"
-POWERLEVEL9K_CONTEXT_ROOT_BACKGROUND="red"
-POWERLEVEL9K_CONTEXT_ROOT_FOREGROUND="blue"
+source $ZSH/oh-my-zsh.sh
+
+gglog (){
+  git log --graph --pretty=format:'%Cred%h%Creset %an -%C(yellow)%d%Creset %s %Cgreen(%cr)'
+}
 
 
 ## ==== My settings === ##
@@ -143,39 +141,3 @@ alias l="lsd"
 alias ll="l -l"
 alias la="ll -a"
 # alias lt='l --tree'
-export NVM_DIR="$([ -z "${XDG_CONFIG_HOME-}" ] && printf %s "${HOME}/.nvm" || printf %s "${XDG_CONFIG_HOME}/nvm")"
-[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh" # This loads nvm
-
-#########################################
-#   zplugins                            #
-#########################################
-# zplugin load marszall87/lambda-pure
-# Two regular plugins loaded without tracking.
-zplugin light zsh-users/zsh-autosuggestions
-zplugin light zdharma/fast-syntax-highlighting
-
-# Plugin history-search-multi-word loaded with tracking.
-zplugin load zdharma/history-search-multi-word
-
-### Added by Zinit's installer
-if [[ ! -f $HOME/.zinit/bin/zinit.zsh ]]; then
-    print -P "%F{33}▓▒░ %F{220}Installing %F{33}DHARMA%F{220} Initiative Plugin Manager (%F{33}zdharma/zinit%F{220})…%f"
-    command mkdir -p "$HOME/.zinit" && command chmod g-rwX "$HOME/.zinit"
-    command git clone https://github.com/zdharma/zinit "$HOME/.zinit/bin" && \
-        print -P "%F{33}▓▒░ %F{34}Installation successful.%f%b" || \
-        print -P "%F{160}▓▒░ The clone has failed.%f%b"
-fi
-
-source "$HOME/.zinit/bin/zinit.zsh"
-autoload -Uz _zinit
-(( ${+_comps} )) && _comps[zinit]=_zinit
-
-# Load a few important annexes, without Turbo
-# (this is currently required for annexes)
-zinit light-mode for \
-    zinit-zsh/z-a-rust \
-    zinit-zsh/z-a-as-monitor \
-    zinit-zsh/z-a-patch-dl \
-    zinit-zsh/z-a-bin-gem-node
-
-### End of Zinit's installer chunk
