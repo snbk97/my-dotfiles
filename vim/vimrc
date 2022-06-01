@@ -5,6 +5,7 @@ set nocompatible              " be iMproved, required
 " vim-plug
 call plug#begin()
     Plug 'morhetz/gruvbox'
+    Plug 'sainnhe/sonokai'
     Plug 'sheerun/vim-polyglot'
     Plug 'jeffkreeftmeijer/vim-numbertoggle'
     " Plug 'junegunn/fzf'
@@ -33,7 +34,6 @@ call plug#begin()
     Plug 'preservim/nerdtree'
     Plug 'Xuyuanp/nerdtree-git-plugin'
     Plug 'neoclide/coc.nvim', {'branch': 'release'}
-    Plug 'dsznajder/vscode-es7-javascript-react-snippets', { 'do': 'yarn install --frozen-lockfile && yarn compile' }
     " Plug 'alvan/vim-closetag'
     " Plug 'terryma/vim-multiple-cursors'
     Plug 'Xuyuanp/yanil'
@@ -49,15 +49,18 @@ syntax on
 if (has("termguicolors"))
  set termguicolors
 endif
-set t_Co=256
+" set t_Co=256
 " set background=dark
-" colorscheme PaperColor
-colorscheme gruvbox
+colorscheme PaperColor
+" colorscheme gruvbox
+" colorscheme palenight
+" colorscheme sonokai
 
 " nvim ttymouse fix
 if !has('nvim')
     set ttymouse=xterm2
 endif
+set scrolloff=10
 set signcolumn=yes
 set encoding=utf8               " Encoding
 set noerrorbells                " No beeps
@@ -453,7 +456,7 @@ set wildignore+=go/bin                       " Go bin files
 set wildignore+=go/bin-vagrant               " Go bin-vagrant files
 set wildignore+=*.pyc                            " Python byte code
 set wildignore+=*.orig                           " Merge resolution files
-set wildignore+=node_modules                           " node_modules
+
 
 " ----------------------------------------- "
 " Plugin configs 			    			"
@@ -464,7 +467,6 @@ let g:ctrlp_extensions = ['smarttabs']
 let g:ctrlp_smarttabs_modify_tabline = 0
 " If 1 will highlight the selected file in the tabline.
 " (Default: 1)
-let g:ctrlp_custom_ignore = 'node_modules\|DS_Store\|git'
 
 let g:ctrlp_smarttabs_reverse = 0
 " Reverse the order in which files are displayed.
@@ -522,7 +524,7 @@ let g:go_autodetect_gopath = 1
 let g:go_term_enabled = 1
 let g:go_snippet_engine = "neosnippet"
 let g:go_highlight_space_tab_error = 0
-let g:Go_highlight_array_whitespace_error = 0
+let g:go_highlight_array_whitespace_error = 0
 let g:go_highlight_trailing_whitespace_error = 0
 let g:go_highlight_extra_types = 0
 let g:go_highlight_operators = 0
@@ -622,9 +624,6 @@ autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTree
 let g:vim_json_syntax_conceal = 1
 
 " ==================== CoC ====================
-" let g:coc_config_home = '~/.vim/coc-settings.json'
-
-autocmd BufWritePost *.ts,*.js !CocCommand eslint.executeAutoFix
 nmap <silent> gd <Plug>(coc-definition)
 nmap <silent> gy <Plug>(coc-type-definition)
 nmap <silent> gi <Plug>(coc-implementation)
@@ -758,8 +757,8 @@ let g:closetag_close_shortcut = '<leader>>'
 
 " =================== vim-airline ========================
 let g:airline_powerline_fonts = 1
-" let g:airline_theme='papercolor'
-let g:airline_theme='gruvbox'
+let g:airline_theme='papercolor'
+" let g:airline_theme='gruvbox'
 " let g:airline_theme='sonokai'
 let g:airline#extensions#tabline#enabled = 1
 let g:airline#extensions#tabline#left_sep = ''
