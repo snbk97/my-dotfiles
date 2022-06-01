@@ -5,8 +5,6 @@ set nocompatible              " be iMproved, required
 " vim-plug
 call plug#begin()
     Plug 'morhetz/gruvbox'
-    Plug 'kaicataldo/material.vim', { 'branch': 'main' }
-    Plug 'sainnhe/sonokai'
     Plug 'sheerun/vim-polyglot'
     Plug 'jeffkreeftmeijer/vim-numbertoggle'
     " Plug 'junegunn/fzf'
@@ -51,22 +49,10 @@ syntax on
 if (has("termguicolors"))
  set termguicolors
 endif
-" set t_Co=256
+set t_Co=256
 " set background=dark
 " colorscheme PaperColor
-" colorscheme gruvbox
-" colorscheme palenight
-" colorscheme sonokai
-colorscheme material
-" let g:material_theme_style = 'default' | 'palenight' | 'ocean' | 'lighter' | 'darker' | 'default-community' | 'palenight-community' | 'ocean-community' | 'lighter-community' | 'darker-community'
-let g:material_theme_style = 'palenight'
-" let g:material_theme_style = 'lighter-community'
-let g:material_terminal_italics = 1
-" let g:palenight_color_overrides = {
-" \    'black': { 'gui': '#000000', "cterm": "0", "cterm16": "0", "guifg":"0" },
-"
-" \}
-colorscheme material
+colorscheme gruvbox
 
 " nvim ttymouse fix
 if !has('nvim')
@@ -467,7 +453,7 @@ set wildignore+=go/bin                       " Go bin files
 set wildignore+=go/bin-vagrant               " Go bin-vagrant files
 set wildignore+=*.pyc                            " Python byte code
 set wildignore+=*.orig                           " Merge resolution files
-
+set wildignore+=node_modules                           " node_modules
 
 " ----------------------------------------- "
 " Plugin configs 			    			"
@@ -478,6 +464,7 @@ let g:ctrlp_extensions = ['smarttabs']
 let g:ctrlp_smarttabs_modify_tabline = 0
 " If 1 will highlight the selected file in the tabline.
 " (Default: 1)
+let g:ctrlp_custom_ignore = 'node_modules\|DS_Store\|git'
 
 let g:ctrlp_smarttabs_reverse = 0
 " Reverse the order in which files are displayed.
@@ -535,7 +522,7 @@ let g:go_autodetect_gopath = 1
 let g:go_term_enabled = 1
 let g:go_snippet_engine = "neosnippet"
 let g:go_highlight_space_tab_error = 0
-let g:go_highlight_array_whitespace_error = 0
+let g:Go_highlight_array_whitespace_error = 0
 let g:go_highlight_trailing_whitespace_error = 0
 let g:go_highlight_extra_types = 0
 let g:go_highlight_operators = 0
@@ -635,6 +622,9 @@ autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTree
 let g:vim_json_syntax_conceal = 1
 
 " ==================== CoC ====================
+" let g:coc_config_home = '~/.vim/coc-settings.json'
+
+autocmd BufWritePost *.ts,*.js !CocCommand eslint.executeAutoFix
 nmap <silent> gd <Plug>(coc-definition)
 nmap <silent> gy <Plug>(coc-type-definition)
 nmap <silent> gi <Plug>(coc-implementation)
@@ -768,9 +758,8 @@ let g:closetag_close_shortcut = '<leader>>'
 
 " =================== vim-airline ========================
 let g:airline_powerline_fonts = 1
-let g:airline_theme='material'
 " let g:airline_theme='papercolor'
-" let g:airline_theme='gruvbox'
+let g:airline_theme='gruvbox'
 " let g:airline_theme='sonokai'
 let g:airline#extensions#tabline#enabled = 1
 let g:airline#extensions#tabline#left_sep = ''
