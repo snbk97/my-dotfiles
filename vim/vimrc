@@ -9,6 +9,7 @@ call plug#begin()
     Plug 'sheerun/vim-polyglot'
     Plug 'jeffkreeftmeijer/vim-numbertoggle'
     " Plug 'junegunn/fzf'
+    " Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
     Plug 'junegunn/vim-easy-align'
     Plug 'ctrlpvim/ctrlp.vim'
     Plug 'Raimondi/delimitMate'
@@ -38,6 +39,8 @@ call plug#begin()
     " Plug 'terryma/vim-multiple-cursors'
     Plug 'Xuyuanp/yanil'
     Plug 'NLKNguyen/papercolor-theme'
+    Plug 'nvim-lua/plenary.nvim'
+    Plug 'nvim-telescope/telescope.nvim'
 call plug#end()
 " turned on auto, by vim-plug
 filetype plugin indent off
@@ -297,6 +300,7 @@ nnoremap <leader>r :QuickRun<CR>
 let g:quickrun_known_file_types = {
     \"py": ["!python3 %"],
     \"md": ["!okular %"],
+    \"go": ["!go run %"],
   \}
 
 

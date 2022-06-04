@@ -2,8 +2,9 @@ set path+=**
 
 
 call plug#begin()
+	Plug 'nvim-lua/plenary.nvim'
+  Plug 'nvim-telescope/telescope.nvim'
   Plug 'morhetz/gruvbox'
-  " Plug 'kaicataldo/material.vim', { 'branch': 'main' }
   " Plug 'sainnhe/sonokai'
   " Plug 'sheerun/vim-polyglot'
   Plug 'jeffkreeftmeijer/vim-numbertoggle'
@@ -45,6 +46,8 @@ call plug#begin()
   Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
 call plug#end()
 
+:luafile ~/.config/nvim/lua/user/init.lua
+
 set guicursor=i:block
 " colorscheme PaperColor
 colorscheme gruvbox
@@ -71,6 +74,7 @@ nnoremap <leader>r :QuickRun<CR>
 let g:quickrun_known_file_types = {
     \"py": ["!python3 %"],
     \"md": ["!okular %"],
+	\"go": ["!go run %"]
   \}
 
 
