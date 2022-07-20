@@ -4,12 +4,13 @@ set nocompatible              " be iMproved, required
 "-------------------------------------------------------------
 " vim-plug
 call plug#begin()
+    Plug 'arcticicestudio/nord-vim'
     Plug 'morhetz/gruvbox'
     Plug 'sainnhe/sonokai'
     Plug 'sheerun/vim-polyglot'
     Plug 'jeffkreeftmeijer/vim-numbertoggle'
     " Plug 'junegunn/fzf'
-    " Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
+    " Plug 'fatih/vim-go'
     Plug 'junegunn/vim-easy-align'
     Plug 'ctrlpvim/ctrlp.vim'
     Plug 'Raimondi/delimitMate'
@@ -37,25 +38,23 @@ call plug#begin()
     Plug 'neoclide/coc.nvim', {'branch': 'release'}
     " Plug 'alvan/vim-closetag'
     " Plug 'terryma/vim-multiple-cursors'
-    Plug 'Xuyuanp/yanil'
     Plug 'NLKNguyen/papercolor-theme'
-    Plug 'nvim-lua/plenary.nvim'
-    Plug 'nvim-telescope/telescope.nvim'
 call plug#end()
 " turned on auto, by vim-plug
 filetype plugin indent off
 syntax on
-"
-" Settings
-"
 
-if (has("termguicolors"))
- set termguicolors
-endif
+
+" Settings
+" if (has("termguicolors"))
+"  set termguicolors
+" endif
 " set t_Co=256
-" set background=dark
-colorscheme PaperColor
-" colorscheme gruvbox
+set background=dark
+" colorscheme zenburn
+" colorscheme PaperColor
+colorscheme gruvbox
+" colorscheme nord
 " colorscheme palenight
 " colorscheme sonokai
 
@@ -669,11 +668,14 @@ imap <C-j> <Plug>(coc-snippets-expand-jump)
 " Use <leader>x for convert visual selected code to snippet
 xmap <leader>x  <Plug>(coc-convert-snippet)
 
-inoremap <silent><expr> <C-k>
-      \ pumvisible() ? coc#_select_confirm() :
-      \ coc#expandableOrJumpable() ? "\<C-r>=coc#rpc#request('doKeymap', ['snippets-expand-jump',''])\<CR>" :
-      \ <SID>check_back_space() ? "\<TAB>" :
-      \ coc#refresh()
+" inoremap <silent> <expr> <C-k>
+"       \ pumvisible() ? coc#_select_confirm() :
+"       \ coc#expandableOrJumpable() ? "\<C-r>=coc#rpc#request('doKeymap', ['snippets-expand-jump',''])\<CR>" :
+"       \ <SID>check_back_space() ? "\<TAB>" :
+"       \ coc#refresh()
+
+inoremap <silent><expr> <cr> pumvisible() ? coc#_select_confirm()
+                              \: "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
 
 function! s:check_back_space() abort
   let col = col('.') - 1
@@ -761,8 +763,10 @@ let g:closetag_close_shortcut = '<leader>>'
 
 " =================== vim-airline ========================
 let g:airline_powerline_fonts = 1
-let g:airline_theme='papercolor'
+" let g:airline_theme='zenburn'
+" let g:airline_theme='papercolor'
 " let g:airline_theme='gruvbox'
+" let g:airline_theme='nord'
 " let g:airline_theme='sonokai'
 let g:airline#extensions#tabline#enabled = 1
 let g:airline#extensions#tabline#left_sep = ''
