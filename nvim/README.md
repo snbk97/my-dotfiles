@@ -1,9 +1,14 @@
 ## TODO
 - [x] lsp setup, auto completions
-- [ ] git gutter lines
+- [x] git gutter lines
 - [ ] better find and replace  
-- [ ] lsp auto installation  
-- [ ] nvim alpha for startpage
-- [ ] auto save file 
-- [ ] fix quit issue on :q
-- [ ] configure telescope
+- [x] lsp auto installation  
+- [x] nvim alpha for startpage
+- [x] auto save file 
+- [x] fix quit issue on :q
+- [x] configure telescope
+- [ ] lsp signature not workings
+- [ ] vim notify maybes
+- [ ] lsp diagnosticts not show on the side of the line
+- [ ] move line up or down
+- [ ] auto hover issue

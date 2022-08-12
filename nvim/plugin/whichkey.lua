@@ -1,6 +1,3 @@
---local M = {}
-
---function M.setup()
 local ok, whichkey = pcall(require,"which-key")
 if not ok then
   return
@@ -23,38 +20,37 @@ local opts = {
 }
 
 local mappings = {
---  ["w"] = { "<cmd>update!<CR>", "Save" },
---  ["q"] = { "<cmd>q!<CR>", "Quit" },
   ["<space>"] = { "<cmd>nohlsearch<CR>", "No Highlight" },
 
   b = {
     name = "Buffer",
-    c = { "<Cmd>bd!<Cr>", "Close current buffer" },
-    D = { "<Cmd>%bd|e#|bd#<Cr>", "Delete all buffers" },
+    c = { "<Cmd>bd!<CR>", "Close current buffer" },
+    D = { "<Cmd>%bd|e#|bd#<CR>", "Delete all buffers" },
   },
 
   f = {
     name = "Find",
-    f = { "<cmd>lua require('utils.finder').find_files()<cr>", "Files" },
-    b = { "<cmd>FzfLua buffers<cr>", "Buffers" },
-    o = { "<cmd>FzfLua oldfiles<cr>", "Old files" },
-    g = { "<cmd>FzfLua live_grep<cr>", "Live grep" },
-    c = { "<cmd>FzfLua commands<cr>", "Commands" },
-    e = { "<cmd>NvimTreeToggle<cr>", "Explorer" },
+    -- t = { "<cmd>lua require('utils.finder').find_files()<CR>", "Files" },
+    b = { "<cmd>Telescope buffers<CR>", "Buffers" },
+    o = { "<cmd>Telescope oldfiles<CR>", "Old files" },
+    s = { "<cmd>Telescope live_grep<CR>", "Old files" },
+    f = { "<cmd>Telescope find_files<CR>", "Find Files" },
+    -- g = { "<cmd>FzfLua live_grep<CR>", "Live grep" },
+    -- c = { "<cmd>FzfLua commands<CR>", "Commands" },
+    e = { "<cmd>NvimTreeToggle<CR>", "Explorer" },
   },
 
   z = {
     name = "Packer",
-    c = { "<cmd>PackerCompile<cr>", "Compile" },
-    i = { "<cmd>PackerInstall<cr>", "Install" },
-    s = { "<cmd>PackerSync<cr>", "Sync" },
-    S = { "<cmd>PackerStatus<cr>", "Status" },
-    u = { "<cmd>PackerUpdate<cr>", "Update" },
+    c = { "<cmd>PackerCompile<CR>", "Compile" },
+    i = { "<cmd>PackerInstall<CR>", "Install" },
+    s = { "<cmd>PackerSync<CR>", "Sync" },
+    S = { "<cmd>PackerStatus<CR>", "Status" },
+    u = { "<cmd>PackerUpdate<CR>", "Update" },
   },
 
   g = {
     name = "Git",
-    s = { "<cmd>Neogit<CR>", "Status" },
   },
   triggers_blacklist = {
     -- list of mode / prefixes that should never be hooked by WhichKey
@@ -68,6 +64,3 @@ local mappings = {
 whichkey.setup(conf)
 whichkey.register(mappings, opts)
 return whichkey
--- end
-
---return M
