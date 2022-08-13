@@ -28,7 +28,8 @@ map("n", "<C-l>",  "<C-W>l", { silent = true })
 map("n", "<C-z>", ":bprev<CR>") -- switch to next buffer
 map("n", "<C-x>", ":bnext<CR>") -- switch to prev buffer
 
-
+-- LSP
+map("n", "<leader>j", "<cmd> vim.lsp.buf.formatting()<CR>")
 --------------------------------------------------------------------------------
 -- Plugin keyBindings --
 --------------------------------------------------------------------------------
