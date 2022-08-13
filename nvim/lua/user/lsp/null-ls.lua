@@ -21,7 +21,8 @@ return null_ls.setup {
       },
     }),
 		codeActions.eslint,
-		formatting.prettier,
+		--formatting.prettier,
+		formatting.prettierd,
 		formatting.stylua,
     -- null_ls.builtins.completion.spell,
     -- diagnostics.flake8
