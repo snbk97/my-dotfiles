@@ -1,3 +1,6 @@
+-- disbled
+
+--[[
 local ok, lsp_sig = pcall(require, "lsp_signaure")
 if not ok then
   return
@@ -10,3 +13,4 @@ return lsp_sig.setup({
   }
 })
 
+]]

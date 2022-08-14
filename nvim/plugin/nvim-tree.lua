@@ -12,6 +12,10 @@ return nvimTree.setup {
     height = 30,
     side = "left",
   },
+  update_focused_file = {
+    enable = true,
+    update_cwd = true,
+  },
   renderer = {
     add_trailing = false,
     group_empty = false,

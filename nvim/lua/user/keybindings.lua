@@ -15,8 +15,8 @@ map("n", ":q", ":q!")
 map("n", "<F12>", ":exec (&bg == 'light' ? 'set bg=dark' : 'set bg=light')<CR>", { silent = true }) --quick background switch
 map("n", "<leader>q", "<cmd>Sayonara<CR>", { silent = true }) -- sane buffer quit
 map("n", "<leader>w", ":w!<cr>") -- fast save
-map("n", "<C-Z>", "u") -- undo
-map("n", "<C-Y>", "<C-R>") -- redo
+--[[ map("n", "<C-Z>", "u") -- undo ]]
+--[[ map("n", "<C-Y>", "<C-R>") -- redo ]]
 
 -- window remap
 map("n", "<C-j>",  "<C-W>j", { silent = true })
@@ -29,7 +29,7 @@ map("n", "<C-z>", ":bprev<CR>") -- switch to next buffer
 map("n", "<C-x>", ":bnext<CR>") -- switch to prev buffer
 
 -- LSP
-map("n", "<leader>j", "<cmd> vim.lsp.buf.formatting()<CR>")
+map("n", "<leader>j", "<cmd>vim.lsp.buf.formatting()<CR>")
 --------------------------------------------------------------------------------
 -- Plugin keyBindings --
 --------------------------------------------------------------------------------
