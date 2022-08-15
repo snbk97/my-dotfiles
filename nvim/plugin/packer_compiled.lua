@@ -99,6 +99,11 @@ _G.packer_plugins = {
     path = "/home/sayan/.local/share/nvim/site/pack/packer/start/bufferline.nvim",
     url = "https://github.com/akinsho/bufferline.nvim"
   },
+  catppuccin = {
+    loaded = true,
+    path = "/home/sayan/.local/share/nvim/site/pack/packer/start/catppuccin",
+    url = "https://github.com/catppuccin/nvim"
+  },
   ["cmp-buffer"] = {
     loaded = true,
     path = "/home/sayan/.local/share/nvim/site/pack/packer/start/cmp-buffer",
@@ -134,10 +139,20 @@ _G.packer_plugins = {
     path = "/home/sayan/.local/share/nvim/site/pack/packer/start/darkplus.nvim",
     url = "https://github.com/lunarvim/darkplus.nvim"
   },
+  everblush = {
+    loaded = true,
+    path = "/home/sayan/.local/share/nvim/site/pack/packer/start/everblush",
+    url = "https://github.com/Everblush/everblush.nvim"
+  },
   everforest = {
     loaded = true,
     path = "/home/sayan/.local/share/nvim/site/pack/packer/start/everforest",
     url = "https://github.com/sainnhe/everforest"
+  },
+  ["fidget.nvim"] = {
+    loaded = true,
+    path = "/home/sayan/.local/share/nvim/site/pack/packer/start/fidget.nvim",
+    url = "https://github.com/j-hui/fidget.nvim"
   },
   ["friendly-snippets"] = {
     loaded = true,
@@ -159,6 +174,11 @@ _G.packer_plugins = {
     path = "/home/sayan/.local/share/nvim/site/pack/packer/start/indent-blankline.nvim",
     url = "https://github.com/lukas-reineke/indent-blankline.nvim"
   },
+  ["jaq-nvim"] = {
+    loaded = true,
+    path = "/home/sayan/.local/share/nvim/site/pack/packer/start/jaq-nvim",
+    url = "https://github.com/is0n/jaq-nvim"
+  },
   ["lazygit.nvim"] = {
     loaded = true,
     path = "/home/sayan/.local/share/nvim/site/pack/packer/start/lazygit.nvim",
@@ -178,6 +198,11 @@ _G.packer_plugins = {
     loaded = true,
     path = "/home/sayan/.local/share/nvim/site/pack/packer/start/lualine.nvim",
     url = "https://github.com/nvim-lualine/lualine.nvim"
+  },
+  neovim = {
+    loaded = true,
+    path = "/home/sayan/.local/share/nvim/site/pack/packer/start/neovim",
+    url = "https://github.com/rose-pine/neovim"
   },
   ["null-ls.nvim"] = {
     loaded = true,
