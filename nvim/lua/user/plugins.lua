@@ -51,12 +51,13 @@ return packer.startup(function(use)
   use({ "mhinz/vim-sayonara" }) -- safe quit
   use({ "nvim-lualine/lualine.nvim" }) -- status line
   -- use({ "ahmedkhalf/project.nvim" })
+  use ({ "is0n/jaq-nvim" })
   use({ "lukas-reineke/indent-blankline.nvim" })
   use({ "goolord/alpha-nvim" }) -- startpage
   use("folke/which-key.nvim") -- keyconfig
   use({ "rcarriga/nvim-notify" }) -- notifications
   -- use({ "Shatur/neovim-session-manager" })
-  --
+
   -- benchmark
   use({ "lewis6991/impatient.nvim" }) -- fast load times
   use({ "dstein64/vim-startuptime" }) -- StartupTime
@@ -74,16 +75,18 @@ return packer.startup(function(use)
   use({ "windwp/nvim-autopairs" }) -- Autopairs, integrates with both cmp and treesitter
   use({ "Pocco81/auto-save.nvim" }) -- auto save
 
-
   -- buffers and tabs
   use({ "tiagovla/scope.nvim" })
   use({ "akinsho/bufferline.nvim" })
 
   -- colorschemes
   -- use {'dracula/vim', as = 'dracula'}
+  use { 'Everblush/everblush.nvim', as = 'everblush' }
   use("sainnhe/everforest")
   use({ "folke/tokyonight.nvim" })
   use("lunarvim/darkplus.nvim")
+  use({ "catppuccin/nvim", as =  'catppuccin' }) -- TODO: wrie config
+  use("rose-pine/neovim") -- TODO: wrie config
 
   -- cmp plugins
   use({ "hrsh7th/nvim-cmp" }) -- The completion plugin
@@ -103,6 +106,8 @@ return packer.startup(function(use)
   -- LSP
   use 'neovim/nvim-lspconfig' -- enable LSP
   use 'williamboman/nvim-lsp-installer' -- LSP installer
+  --  use({ "nvim-lua/lsp-status.nvim" }) -- LSP status bar integration
+  use({ "j-hui/fidget.nvim" }) -- LSP status bar integration
   use({ "jose-elias-alvarez/null-ls.nvim" }) -- for formatters and linters
   use({ 'weilbith/nvim-code-action-menu', cmd = 'CodeActionMenu' }) -- LSP code action
   use({ 'kosayoda/nvim-lightbulb', requires = 'antoinemadec/FixCursorHold.nvim' }) -- lightbulb setup

@@ -1,7 +1,7 @@
 ## TODO
 - [x] lsp setup, auto completions
 - [x] git gutter lines
-- [ ] better find and replace  
+- [x] better find and replace  
 - [x] lsp auto installation  
 - [x] nvim alpha for startpage
 - [x] auto save file 
@@ -9,6 +9,7 @@
 - [x] configure telescope
 - [ ] lsp signature not workings
 - [ ] vim notify maybes
-- [ ] lsp diagnosticts not show on the side of the line
-- [ ] move line up or down
-- [ ] auto hover issue
+- [x] lsp diagnosticts not show on the side of the line
+- [x] move line up or down
+- [x] auto hover issue
+- [ ] "textDocument/signatureHelp is not supoprted" error in some languages

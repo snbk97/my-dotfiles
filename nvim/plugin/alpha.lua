@@ -3,6 +3,16 @@ if not ok then
   return
 end
 
+--[[ REFERENCE
+-- https://github.com/goolord/alpha-nvim/discussions/16
+-- https://github.com/emuel-vassallo/dotfiles/blob/main/.config/nvim/lua/plugins/configs/alpha.lua
+--]]
+
+-- Disable folding on alpha buffer
+vim.cmd([[
+    autocmd FileType alpha setlocal nofoldenable
+]])
+
 local dashboard = require('alpha.themes.dashboard')
 
 local plugins_gen = io.popen('fd -d 2 . $HOME"/.local/share/nvim/site/pack/packer" | head -n -2 | wc -l | tr -d "\n" ')
@@ -104,7 +114,7 @@ dashboard.section.buttons.val = {
   dashboard.button("LDR fo", "   MRU", ":Telescope oldfiles<CR>"),
   dashboard.button("LDR gg", "   Git", ":LazyGitCR>"),
   dashboard.button("LDR zs", "   Packer Sync", ":PackerSync<CR>"),
-  dashboard.button("c", "   Edit Config", ":e ~/.config/nvim/<CR>"),
+  dashboard.button("c", "   Edit Config", ":e ~/.config/nvim/init.lua<CR>"),
   dashboard.button("LDR q", "   Quit NVIM", ":qa<CR>"),
 }
 
