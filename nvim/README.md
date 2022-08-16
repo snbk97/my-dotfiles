@@ -1,2 +1,15 @@
-# EXPERIMENTAL 
- ## DO NOT USE
+## TODO
+- [x] lsp setup, auto completions
+- [x] git gutter lines
+- [x] better find and replace  
+- [x] lsp auto installation  
+- [x] nvim alpha for startpage
+- [x] auto save file 
+- [x] fix quit issue on :q
+- [x] configure telescope
+- [ ] lsp signature not workings
+- [ ] vim notify maybes
+- [x] lsp diagnosticts not show on the side of the line
+- [x] move line up or down
+- [x] auto hover issue
+- [ ] "textDocument/signatureHelp is not supoprted" error in some languages
