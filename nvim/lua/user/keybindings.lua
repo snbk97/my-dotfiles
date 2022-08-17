@@ -11,7 +11,7 @@ end
 --------------------------------------------------------------------------------
 
 -- basic keybindings
-map("n", ":q", ":q!")
+-- map("n", ":q", ":q!")
 map("n", "<F12>", ":exec (&bg == 'light' ? 'set bg=dark' : 'set bg=light')<CR>", { silent = true }) --quick background switch
 map("n", "<leader>q", "<cmd>Sayonara<CR>", { silent = true }) -- sane buffer quit
 map("n", "<leader>w", ":w!<cr>") -- fast save

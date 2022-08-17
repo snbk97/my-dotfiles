@@ -62,6 +62,6 @@ return nvimTree.setup {
     }
   },
   filters = {
-    custom = { ".git", "node_modules" },
+    custom = { ".git", "node_modules", "dist", ".storybook",".worktree", "build" },
   },
 }

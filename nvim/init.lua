@@ -8,6 +8,7 @@ require('impatient')
 -- Themes
 -- vim.cmd[[colorscheme tokyonight]]
 vim.cmd[[colorscheme everforest]]
+-- vim.cmd('colorscheme rose-pine')
 -- vim.cmd[[colorscheme everblush]]
 -- vim.cmd [[colorscheme catppuccin]]
 

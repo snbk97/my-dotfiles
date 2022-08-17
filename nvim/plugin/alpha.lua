@@ -8,14 +8,10 @@ end
 -- https://github.com/emuel-vassallo/dotfiles/blob/main/.config/nvim/lua/plugins/configs/alpha.lua
 --]]
 
--- Disable folding on alpha buffer
-vim.cmd([[
-    autocmd FileType alpha setlocal nofoldenable
-]])
-
 local dashboard = require('alpha.themes.dashboard')
 
-local plugins_gen = io.popen('fd -d 2 . $HOME"/.local/share/nvim/site/pack/packer" | head -n -2 | wc -l | tr -d "\n" ')
+--[[
+--local plugins_gen = io.popen('fd -d 2 . $HOME"/.local/share/nvim/site/pack/packer" | head -n -2 | wc -l | tr -d "\n" ')
 local plugins = plugins_gen:read("*a")
 plugins_gen:close()
 
@@ -23,7 +19,7 @@ local date_gen = io.popen('echo "$(date +%d)/$(date +%m)/$(date +%y)($(date +%a)
 local date = date_gen:read("*a")
 date_gen:close()
 
---[[ local pluginCount = {
+local pluginCount = {
 	type = "text",
 	val = "  " .. plugins .. " plugins in total",
 	opts = {
@@ -32,6 +28,7 @@ date_gen:close()
 	},
 }
 ]]
+
 local function getGreeting(name)
 	local tableTime = os.date("*t")
 	local hour = tableTime.hour
@@ -120,6 +117,11 @@ dashboard.section.buttons.val = {
 
 -- dashboard.section.custom_header = "Loaded",..plugins, "ok"
 dashboard.section.footer.val = require'alpha.fortune'()
+
+-- Disable folding on alpha buffer
+vim.cmd([[
+    autocmd FileType alpha setlocal nofoldenable
+]])
 return alpha.setup(dashboard.config)
 
 ------------------------------------------------------ extensible version
