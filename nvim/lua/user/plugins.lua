@@ -110,7 +110,8 @@ return packer.startup(function(use)
   use({ "j-hui/fidget.nvim" }) -- LSP status bar integration
   use({ "jose-elias-alvarez/null-ls.nvim" }) -- for formatters and linters
   use({ 'weilbith/nvim-code-action-menu', cmd = 'CodeActionMenu' }) -- LSP code action
-  use({ 'kosayoda/nvim-lightbulb', requires = 'antoinemadec/FixCursorHold.nvim' }) -- lightbulb setup
+  use({ "antoinemadec/FixCursorHold.nvim" })
+  --   use({ 'kosayoda/nvim-lightbulb', requires = 'antoinemadec/FixCursorHold.nvim' }) -- lightbulb setup
 
   -- Telescope
   use({ "nvim-telescope/telescope.nvim" })
