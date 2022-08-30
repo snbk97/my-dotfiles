@@ -4,16 +4,16 @@ local fn = vim.fn
 
 local install_path = fn.stdpath("data") .. "/site/pack/packer/start/packer.nvim"
 if fn.empty(fn.glob(install_path)) > 0 then
-	PACKER_BOOTSTRAP = fn.system({
-		"git",
-		"clone",
-		"--depth",
-		"1",
-		"https://github.com/wbthomason/packer.nvim",
-		install_path,
-	})
-	print("Installing packer close and reopen Neovim...")
-	vim.cmd([[packadd packer.nvim]])
+  PACKER_BOOTSTRAP = fn.system({
+    "git",
+    "clone",
+    "--depth",
+    "1",
+    "https://github.com/wbthomason/packer.nvim",
+    install_path,
+  })
+  print("Installing packer close and reopen Neovim...")
+  vim.cmd([[packadd packer.nvim]])
 end
 
 -- Autocommand that reloads neovim whenever you save the plugins.lua file
@@ -27,16 +27,16 @@ vim.cmd([[
 -- Use a protected call so we don't error out on first use
 local status_ok, packer = pcall(require, "packer")
 if not status_ok then
-	return
+  return
 end
 
 -- Have packer use a popup window
 packer.init({
-	display = {
-		open_fn = function()
-			return require("packer.util").float({ border = "rounded" })
-		end,
-	},
+  display = {
+    open_fn = function()
+      return require("packer.util").float({ border = "rounded" })
+    end,
+  },
 })
 
 return packer.startup(function(use)
@@ -44,6 +44,7 @@ return packer.startup(function(use)
   use 'wbthomason/packer.nvim'
 
   -- other plugins here
+  use({ "glepnir/lspsaga.nvim" })
   use({ "nvim-lua/plenary.nvim" }) -- Useful lua functions used by lots of plugins
   use({ "JoosepAlviste/nvim-ts-context-commentstring" })
   use({ "kyazdani42/nvim-web-devicons" })
@@ -51,7 +52,7 @@ return packer.startup(function(use)
   use({ "mhinz/vim-sayonara" }) -- safe quit
   use({ "nvim-lualine/lualine.nvim" }) -- status line
   -- use({ "ahmedkhalf/project.nvim" })
-  use ({ "is0n/jaq-nvim" })
+  use({ "is0n/jaq-nvim" })
   use({ "lukas-reineke/indent-blankline.nvim" })
   use({ "goolord/alpha-nvim" }) -- startpage
   use("folke/which-key.nvim") -- keyconfig
@@ -63,10 +64,19 @@ return packer.startup(function(use)
   use({ "dstein64/vim-startuptime" }) -- StartupTime
 
   -- IDE utils
-  use({ "kylechui/nvim-surround", config=function()
+  use({ "kylechui/nvim-surround", config = function()
     require("nvim-surround").setup()
   end
   }) -- word surround
+
+
+  --[[ -- nvim nightly 0.8 required
+  use { "smjonas/inc-rename.nvim",
+    config = function()
+      require("inc_rename").setup()
+    end
+  } -- better rename
+  ]]
   use({ "RRethy/vim-illuminate" }) -- word highligh on hover in document
   use({ "ray-x/lsp_signature.nvim" })
   use({ "ntpeters/vim-better-whitespace" })
@@ -85,7 +95,7 @@ return packer.startup(function(use)
   use("sainnhe/everforest")
   use({ "folke/tokyonight.nvim" })
   use("lunarvim/darkplus.nvim")
-  use({ "catppuccin/nvim", as =  'catppuccin' }) -- TODO: wrie config
+  use({ "catppuccin/nvim", as = 'catppuccin' }) -- TODO: wrie config
   use("rose-pine/neovim") -- TODO: wrie config
 
   -- cmp plugins
@@ -125,9 +135,8 @@ return packer.startup(function(use)
 
   -- Automatically set up your configuration after cloning packer.nvim
   -- Put this at the end after all plugins
-  --[[ if packer_bootstrap then
+  if PACKER_BOOTSTRAP then
     require('packer').sync()
-  end ]]
   end
+end
 )
-

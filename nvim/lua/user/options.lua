@@ -51,3 +51,7 @@ vim.cmd [[set formatoptions-=cro]] -- TODO: this doesn't seem to work
 -- globals
 vim.g.mapleader = ","
 vim.api.nvim_set_keymap('i', 'jk', '<Esc>', {noremap = true})
+
+-- Dap
+--[[ vim.cmd("highlight DapRed guifg=#E82424") ]]
+--[[ vim.fn.sign_define("DapBreakpoint", { text = "", texthl = "DapRed", linehl = "", numhl = "" }) ]]

@@ -3,6 +3,8 @@ local ok, jaq = pcall(require, 'jaq-nvim')
 if not ok then
  return
 end
+
+
 return jaq.setup({
   cmds = {
     -- Uses vim commands
@@ -16,13 +18,15 @@ return jaq.setup({
       markdown = "glow %",
       python   = "python3 %",
       go       = "go run %",
-      sh       = "sh %"
+      sh       = "sh %",
+      typescript =  "tsc run %",
+      javascript = "node %",
     }
   },
 
   behavior = {
     -- Default type
-    default     = "float",
+    default     = "bang",
   },
 
   ui = {

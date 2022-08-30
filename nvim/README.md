@@ -8,8 +8,10 @@
 - [x] fix quit issue on :q
 - [x] configure telescope
 - [ ] lsp signature not workings
-- [ ] vim notify maybes
+- [x] vim notify 
 - [x] lsp diagnosticts not show on the side of the line
 - [x] move line up or down
 - [x] auto hover issue
-- [ ] "textDocument/signatureHelp is not supoprted" error in some languages
+- [x] "textDocument/signatureHelp is not supoprted" error in some languages
+- [ ] lsp saga + remove nvim-lightbulb
+- [ ] switch to williamboman/mason.nvim

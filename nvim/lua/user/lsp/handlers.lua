@@ -46,16 +46,16 @@ M.setup = function()
   }
   )
 
-  vim.cmd [[autocmd CursorHold * lua vim.diagnostic.open_float({ scope="line" })]]
-  vim.cmd [[autocmd CursorHoldI * silent! lua vim.lsp.buf.signature_help()]]
 
   vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, {
     -- border = "rounded",
+    focusable = false,
     width = 60,
   })
 
   vim.lsp.handlers["textDocument/signatureHelp"] = vim.lsp.with(vim.lsp.handlers.signature_help, {
     border = "rounded",
+    focusable = false,
     width = 60,
   })
 end
@@ -97,25 +97,34 @@ end
 
 -- https://github.com/elianiva/dotfiles/blob/997703ea7cf3ebaf0bc1252b47b8c329929bca5e/nvim/lua/modules/statusline.lua#L134-L145
 M.lsp_progress = function()
-	local lsp = vim.lsp.util.get_progress_messages()[1]
-	if lsp then
-		local name = lsp.name or ""
-		local msg = lsp.message or ""
-		local percentage = lsp.percentage or 0
-		local title = lsp.title or ""
-		return string.format(" %%<%s: %s %s (%s%%%%) ", name, title, msg, percentage)
-	end
-	return ""
+  local lsp = vim.lsp.util.get_progress_messages()[1]
+  if lsp then
+    local name = lsp.name or ""
+    local msg = lsp.message or ""
+    local percentage = lsp.percentage or 0
+    local title = lsp.title or ""
+    return string.format(" %%<%s: %s %s (%s%%%%) ", name, title, msg, percentage)
+  end
+  return ""
 end
 
 M.on_attach = function(client, bufnr)
   -- vim.notify(client.name .. " starting...", "info")
+  local cap = client.resolved_capabilities
+
   if client.name == "tsserver" then
-    client.resolved_capabilities.document_formatting = false
+    cap.document_formatting = false
   end
+
+  if cap.signature_help then
+    vim.cmd [[autocmd CursorHoldI * silent! lua vim.lsp.buf.signature_help()]]
+  end
+
   lsp_keymaps(bufnr)
   lsp_highlight_document(client)
 end
+
+vim.cmd [[autocmd CursorHold * lua vim.diagnostic.open_float({ scope="line" })]]
 
 local capabilities = vim.lsp.protocol.make_client_capabilities()
 

@@ -17,6 +17,8 @@ map("n", "<leader>q", "<cmd>Sayonara<CR>", { silent = true }) -- sane buffer qui
 map("n", "<leader>w", ":w!<cr>") -- fast save
 map("n", "<C-S-up>", "ddkP") -- move line one line up
 map("n", "<C-S-down>", "ddjP") -- move line one line down
+map("n", "<C-a>", "<C-a>") -- decrement number, <C-a> to increment number - using default map
+map("n", "<C-s>", "<C-x>") -- decrement number, <C-a> to increment number - using default map
 
 -- window remap
 map("n", "<C-j>", "<C-W>j", { silent = true })

@@ -12,19 +12,23 @@ return null_ls.setup {
   debug = false,
   sources = {
     -- formatting.prettier.with({ extra_args = { "--no-semi", "--single-quote", "--jsx-single-quote" } }),
-    formatting.black.with({ extra_args = { "--fast" } }),
-    diagnostics.eslint.with({
+    -- formatting.black.with({ extra_args = { "--fast" } }),
+    --[[ diagnostics.eslint.with({
       filetypes = {
         "javascriptreact",
         "typescript",
         "typescriptreact",
       },
-    }),
+    }), ]]
     codeActions.eslint,
-    --formatting.prettier,
-    formatting.prettierd,
+    formatting.prettier,
     formatting.stylua,
+    --formatting.prettier,
     -- null_ls.builtins.completion.spell,
     -- diagnostics.flake8
   },
+  --[[ on_attach = function(client)
+		vim.cmd("autocmd BufWritePre <buffer> lua vim.lsp.buf.formatting_seq_sync()")
+		client.resolved_capabilities.document_formatting = true
+	end, ]]
 }
