@@ -19,6 +19,14 @@ local opts = {
   nowait = false, -- use `nowait` when creating keymaps
 }
 
+function search_current_buffer()
+  -- You can pass additional configuration to telescope to change theme, layout, etc.
+  require('telescope.builtin').current_buffer_fuzzy_find(require('telescope.themes').get_dropdown {
+    winblend = 10,
+    previewer = false,
+  })
+end
+
 local mappings = {
   ["<space>"] = { "<cmd>nohlsearch<CR>", "No Highlight" },
 
@@ -30,12 +38,11 @@ local mappings = {
 
   f = {
     name = "Find",
-    -- t = { "<cmd>lua require('utils.finder').find_files()<CR>", "Files" },
+    c = { search_current_buffer, "Current buffer" },
     b = { "<cmd>Telescope buffers<CR>", "Buffers" },
-    o = { "<cmd>Telescope oldfiles<CR>", "Old files" },
-    s = { "<cmd>Telescope live_grep<CR>", "Old files" },
+    o = { "<cmd>Telescope oldfiles<CR>", "Recent files" },
+    s = { "<cmd>Telescope live_grep<CR>", "Search in files" },
     f = { "<cmd>Telescope find_files<CR>", "Find Files" },
-    -- g = { "<cmd>FzfLua live_grep<CR>", "Live grep" },
     -- c = { "<cmd>FzfLua commands<CR>", "Commands" },
     e = { "<cmd>NvimTreeToggle<CR>", "Explorer" },
   },

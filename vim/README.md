@@ -7,7 +7,7 @@ For any other language support, you'll have to research and add support
 yourself.
 
 ## Stuff in here
- - Material and PaperColor Theme
+ - Material and PaperColor Theme (BAD)
  - Ag for searching (you'll need to install it).
  - vim fugitive
  - uses coc LSP

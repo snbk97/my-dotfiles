@@ -21,6 +21,7 @@ return null_ls.setup {
       },
     }), ]]
     codeActions.eslint,
+    formatting.eslint,
     formatting.prettier,
     formatting.stylua,
     --formatting.prettier,

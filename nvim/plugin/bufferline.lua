@@ -8,7 +8,7 @@ require('bufferline').setup {
     middle_mouse_command = nil,          -- can be a string | function, see "Mouse actions"
     max_name_length = 18,
     tab_size = 18,
-    separator_style = "padded_slant", -- | "thick" | "thin" | { 'any', 'any' },
+    separator_style = "thick", -- | "thick" | "thin" | "padded_slant" |"{ 'any', 'any' },
     -- separator_style = "thick", -- | "thick" | "thin" | { 'any', 'any' },
     diagnostics_update_in_insert = false,
     max_prefix_length = 15, -- prefix used when a buffer is de-duplicated
